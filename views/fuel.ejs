@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Giá xăng dầu</title>
+</head>
+<body>
+
+<h2>Giá xăng dầu hôm nay</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Sản phẩm</th>
+        <th>Vùng 1</th>
+        <th>Vùng 2</th>
+    </tr>
+
+    <% data.forEach(item => { %>
+        <tr>
+            <td><%= item.name %></td>
+            <td><%= item.vung_1.toLocaleString() %></td>
+            <td><%= item.vung_2.toLocaleString() %></td>
+        </tr>
+    <% }) %>
+
+</table>
+
+</body>
+</html>
