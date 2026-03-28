@@ -1,9 +1,19 @@
 const fuelService = require("../services/fuelService");
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET");
+  res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
+
+  if (req.method !== "GET") {
+    res.status(405).json({ success: false, message: "Method not allowed" });
+    return;
+  }
 
   try {
     const data = await fuelService.getFuelPrices();
@@ -17,4 +27,4 @@ module.exports = async (req, res) => {
       message: err.message,
     });
   }
-};
+}
