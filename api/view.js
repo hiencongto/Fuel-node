@@ -1,7 +1,8 @@
 const ejs = require("ejs");
+const path = require("path");
 const fuelService = require("../services/fuelService");
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== "GET") {
     res.status(405).json({ success: false, message: "Method not allowed" });
     return;
@@ -12,7 +13,7 @@ export default async function handler(req, res) {
     
     // Render EJS template
     const html = await ejs.renderFile(
-      require("path").join(process.cwd(), "views/fuel.ejs"),
+      path.join(process.cwd(), "views/fuel.ejs"),
       { data }
     );
     
@@ -21,4 +22,4 @@ export default async function handler(req, res) {
   } catch (err) {
     res.status(500).send("Error: " + err.message);
   }
-}
+};
